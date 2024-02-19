@@ -16,6 +16,11 @@ class Movie < ApplicationRecord
   validates(:director_id, presence: true)
   validates(:title, uniqueness: true)
 
+belongs_to(:director)
+has_many(:characters, class_name: "Character", foreign_key: "movie_id")
+has_many(:actors, through: "characters", source: :movie)
+
+=begin
   def director
     key = self.director_id
 
@@ -25,4 +30,5 @@ class Movie < ApplicationRecord
 
     return the_one
   end
+=end
 end
